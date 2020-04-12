@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Quiz.DataAccess\Quiz.DataAccess.csproj" />
+    <ProjectReference Include="..\Quiz.Dto\Quiz.Dto.csproj" />
+    <ProjectReference Include="..\Quiz.Results\Quiz.Results.csproj" />
+    <ProjectReference Include="..\Quiz.UnitOfWork\Quiz.UnitOfWork.csproj" />
+  </ItemGroup>
+
+</Project>
