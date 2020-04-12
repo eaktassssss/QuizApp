@@ -41,7 +41,7 @@ namespace Quiz.WebApi.Controllers
             }
             return Ok(result);
         }
-        [HttpPut("edit-quiz")]
+        [HttpPut("update-quiz")]
         public async Task<ActionResult> UpdateAsync(QuizDto quizDto)
         {
             var result = await _quizService.UpdateAsync(quizDto);
