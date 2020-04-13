@@ -13,5 +13,7 @@ namespace Quiz.Repositories.Abstract
         Task<IDataResult<T>> AddAsync(T entity);
         Task<IDataResult<T>> UpdateAsync(T entity);
         Task<IDataResult<T>> DeleteAsync(T entity);
+        Task<IDataResult<T>> GetAsync(Expression<Func<T, bool>> filter);
+
     }
 }

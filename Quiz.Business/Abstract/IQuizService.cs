@@ -15,5 +15,6 @@ namespace Quiz.Business.Abstract
         Task<IDataResult<QuizDto>> AddAsync(QuizDto entity);
         Task<IDataResult<QuizDto>> UpdateAsync(QuizDto entity);
         Task<IDataResult<QuizDto>> DeleteAsync(QuizDto entity);
+        Task<IDataResult<QuizDto>> GetAsync(int id);
     }
 }

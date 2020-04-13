@@ -94,6 +94,38 @@ namespace Quiz.Business.Concrete
             return response;
         }
 
+        public async Task<IDataResult<QuizDto>> GetAsync(int id)
+        {
+            var response = new DataResult<QuizDto>();
+            try
+            {
+                var result = await _quizDal.GetAsync(x => x.Id == id);
+                if (result.Successeded && result.Data != null)
+                {
+                    response.Message = "Successful transaction";
+                    response.Data = _mapper.Map<QuizDto>(result.Data);
+                    response.Successeded = result.Successeded;
+                    response.StatusCode = 200;
+
+                }
+                else
+                {
+                    response.Message = "No Content";
+                    response.Successeded = false;
+                    response.Data = null;
+                    response.StatusCode = 204;
+                }
+            }
+            catch (Exception exception)
+            {
+                response.Message = exception.Message;
+                response.Successeded = false;
+                response.Data = null;
+                response.StatusCode = 400;
+            }
+            return response;
+        }
+
 
         public async Task<IDataResult<List<QuizDto>>> GetListAsync()
         {

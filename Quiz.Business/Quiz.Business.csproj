@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Quiz.UnitOfWork\Quiz.UnitOfWork.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Security\Microsoft\Jwt\" />
+  </ItemGroup>
+
 </Project>

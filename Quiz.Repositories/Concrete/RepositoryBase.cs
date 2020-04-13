@@ -67,5 +67,14 @@ namespace Quiz.Repositories.Concrete
             response.Data = result.Entity;
             return response;
         }
+
+        public async Task<IDataResult<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter)
+        {
+            var response = new DataResult<TEntity>();
+            var result = await _context.Set<TEntity>().FirstOrDefaultAsync(filter);
+            response.Successeded = true;
+            response.Data = result;
+            return response;
+        }
     }
 }
