@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
 using Quiz.Business.Abstract;
+using Quiz.Business.Security.Microsoft.Jwt.Abstract;
+using Quiz.Business.Security.Microsoft.Jwt.Concrete;
 using Quiz.Dto;
+using Quiz.Entities;
 using Quiz.Results.Abstract;
 using Quiz.Results.Concrete;
 

@@ -4,41 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore.Internal;
 using Quiz.Business.Abstract;
 using Quiz.DataAccess.Abstract;
 using Quiz.Dto;
 using Quiz.Entities;
-using Quiz.Entities.Context;
 using Quiz.Results.Abstract;
 using Quiz.Results.Concrete;
 using Quiz.UnitOfWork.Abstract;
-using Exception = System.Exception;
 
 namespace Quiz.Business.Concrete
 {
-    public class QuizManager : IQuizService
+    public class UserManager:IUserService
     {
-        private readonly IQuizDal _quizDal;
+        private readonly IUserDal _userDal;
         private IMapper _mapper;
         private IUnitOfWork _unitOfWork;
-        public QuizManager(IQuizDal quizDal, IMapper mapper, IUnitOfWork unitOfWork)
+        public UserManager(IUserDal userDal, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _quizDal = quizDal;
+            _userDal = userDal;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
-        public async Task<IDataResult<QuizDto>> AddAsync(QuizDto entity)
+        public async Task<IDataResult<UserDto>> AddAsync(UserDto entity)
         {
-            var response = new DataResult<QuizDto>();
+            var response = new DataResult<UserDto>();
             try
             {
-                var result = await _quizDal.AddAsync(_mapper.Map<Quizs>(entity));
+                var result = await _userDal.AddAsync(_mapper.Map<Users>(entity));
                 await _unitOfWork.CompletedAsync();
                 if (result.Successeded && result.Data != null)
                 {
                     response.Message = "Successful transaction";
-                    response.Data = _mapper.Map<QuizDto>(result.Data);
+                    response.Data = _mapper.Map<UserDto>(result.Data);
                     response.Successeded = result.Successeded;
                     response.StatusCode = 200;
 
@@ -60,17 +57,17 @@ namespace Quiz.Business.Concrete
             }
             return response;
         }
-        public async Task<IDataResult<QuizDto>> DeleteAsync(QuizDto entity)
+        public async Task<IDataResult<UserDto>> DeleteAsync(UserDto entity)
         {
-            var response = new DataResult<QuizDto>();
+            var response = new DataResult<UserDto>();
             try
             {
-                var result = await _quizDal.DeleteAsync(_mapper.Map<Quizs>(entity));
+                var result = await _userDal.DeleteAsync(_mapper.Map<Users>(entity));
                 await _unitOfWork.CompletedAsync();
                 if (result.Successeded && result.Data != null)
                 {
                     response.Message = "Successful transaction";
-                    response.Data = _mapper.Map<QuizDto>(result.Data);
+                    response.Data = _mapper.Map<UserDto>(result.Data);
                     response.Successeded = result.Successeded;
                     response.StatusCode = 200;
 
@@ -92,16 +89,16 @@ namespace Quiz.Business.Concrete
             }
             return response;
         }
-        public async Task<IDataResult<QuizDto>> GetAsync(int id)
+        public async Task<IDataResult<UserDto>> GetAsync(int id)
         {
-            var response = new DataResult<QuizDto>();
+            var response = new DataResult<UserDto>();
             try
             {
-                var result = await _quizDal.GetAsync(x => x.Id == id);
+                var result = await _userDal.GetAsync(x => x.Id == id);
                 if (result.Successeded && result.Data != null)
                 {
                     response.Message = "Successful transaction";
-                    response.Data = _mapper.Map<QuizDto>(result.Data);
+                    response.Data = _mapper.Map<UserDto>(result.Data);
                     response.Successeded = result.Successeded;
                     response.StatusCode = 200;
 
@@ -123,18 +120,18 @@ namespace Quiz.Business.Concrete
             }
             return response;
         }
-        public async Task<IDataResult<List<QuizDto>>> GetListAsync()
+        public async Task<IDataResult<List<UserDto>>> GetListAsync()
         {
-            var response = new DataResult<List<QuizDto>>();
+            var response = new DataResult<List<UserDto>>();
             try
             {
-                var quizs = await _quizDal.GetListAsync();
-                var result = _mapper.Map<List<QuizDto>>(quizs.Data);
-                if (result.Any() && quizs.Successeded)
+                var users = await _userDal.GetListAsync();
+                var result = _mapper.Map<List<UserDto>>(users.Data);
+                if (result.Any() && users.Successeded)
                 {
                     response.Message = "Successful transaction";
-                    response.Data = _mapper.Map<List<QuizDto>>(quizs.Data);
-                    response.Successeded = quizs.Successeded;
+                    response.Data = _mapper.Map<List<UserDto>>(users.Data);
+                    response.Successeded = users.Successeded;
                     response.StatusCode = 200;
                 }
                 else
@@ -154,18 +151,18 @@ namespace Quiz.Business.Concrete
             }
             return response;
         }
-        public async Task<IDataResult<QuizDto>> UpdateAsync(QuizDto entity)
+        public async Task<IDataResult<UserDto>> UpdateAsync(UserDto entity)
         {
-            var response = new DataResult<QuizDto>();
+            var response = new DataResult<UserDto>();
             try
             {
-                var result = await _quizDal.UpdateAsync(_mapper.Map<Quizs>(entity));
+                var result = await _userDal.UpdateAsync(_mapper.Map<Users>(entity));
                 await _unitOfWork.CompletedAsync();
 
                 if (result.Successeded && result.Data != null)
                 {
                     response.Message = "Successful transaction";
-                    response.Data = _mapper.Map<QuizDto>(result.Data);
+                    response.Data = _mapper.Map<UserDto>(result.Data);
                     response.Successeded = result.Successeded;
                     response.StatusCode = 200;
                 }

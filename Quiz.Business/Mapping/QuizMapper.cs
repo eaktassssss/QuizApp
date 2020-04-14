@@ -13,6 +13,8 @@ namespace Quiz.Business.Mapping
         {
             CreateMap<QuizDto, Quizs>();
             CreateMap<Quizs, QuizDto>();
+            CreateMap<Users, UserDto>();
+            CreateMap<UserDto, Users>();
         }
     }
 }
