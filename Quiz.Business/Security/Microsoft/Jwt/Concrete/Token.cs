@@ -20,7 +20,6 @@ namespace Quiz.Business.Security.Microsoft.Jwt.Concrete
     public class Token :IToken
     {
         private readonly JwtTokenDto _jwtTokenOptions;
-
         public Token(IOptions<JwtTokenDto> jwtTokenOptions)
         {
             _jwtTokenOptions = jwtTokenOptions.Value;

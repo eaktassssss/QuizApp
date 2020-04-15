@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
@@ -16,6 +17,7 @@ using Quiz.Results.Concrete;
 
 namespace Quiz.WebApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class QuizController : ControllerBase
@@ -55,5 +57,27 @@ namespace Quiz.WebApi.Controllers
             }
             return Ok(result);
         }
+        [HttpPost("get-quiz")]
+        public async Task<ActionResult> GetAsync(int id)
+        {
+            var result = await _quizService.GetAsync(id);
+            if (!result.Successeded && result.Data == null)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("delete-quiz")]
+        public async Task<ActionResult> DeleteAsync(QuizDto quizDto)
+        {
+            var result = await _quizService.DeleteAsync(quizDto);
+            if (!result.Successeded && result.Data == null)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
     }
 }
