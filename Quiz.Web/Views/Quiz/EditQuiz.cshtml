@@ -1,0 +1,21 @@
+﻿@model Quiz.Dto.QuizDto
+@{
+    ViewData["Title"] = "EditQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form asp-action="EditQuiz" asp-controller="Quiz" method="post">
+    <div class="form-group">
+        <label>Quiz Name</label>
+        <input asp-for="QuizName" type="text" class="form-control">
+        <span asp-validation-for="QuizName" style="color: red; font-weight: bold;font-size: 13px"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="15"></textarea>
+        <span asp-validation-for="QuizName" class="text-danger" style="color: red; font-weight: bold;font-size: 13px"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit Quiz</button>
+    <button type="reset" class="btn btn-primary">Reset</button>
+</form>
+
+

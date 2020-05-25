@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace Quiz.Dto.JwtToken
+namespace Quiz.Dto.Jwt
 {
-    public class JwtTokenDto
+    public class JwtTokenOptionsDto
     {
         public int RefreshTokenExpiration { get; set; }
         public string Audience { get; set; }

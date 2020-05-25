@@ -17,7 +17,7 @@ using Exception = System.Exception;
 
 namespace Quiz.Business.Concrete
 {
-    public class QuizManager : IQuizService
+    public class QuizManager :IQuizService
     {
         private readonly IQuizDal _quizDal;
         private IMapper _mapper;
@@ -37,18 +37,16 @@ namespace Quiz.Business.Concrete
                 await _unitOfWork.CompletedAsync();
                 if (result.Successeded && result.Data != null)
                 {
-                    response.Message = "Successful transaction";
+                    response.Message = "Quiz Ekleme İşlemi Başarılı";
                     response.Data = _mapper.Map<QuizDto>(result.Data);
                     response.Successeded = result.Successeded;
-                    response.StatusCode = 200;
 
                 }
                 else
                 {
-                    response.Message = "No Content";
-                    response.Successeded = false;
-                    response.Data = null;
-                    response.StatusCode = 204;
+                    response.Message = "İşlem Sırasında Hata Oluştu";
+                    response.Successeded = result.Successeded;
+                    response.Data =null;
                 }
             }
             catch (Exception exception)
@@ -56,7 +54,6 @@ namespace Quiz.Business.Concrete
                 response.Message = exception.Message;
                 response.Successeded = false;
                 response.Data = null;
-                response.StatusCode = 400;
             }
             return response;
         }
@@ -69,18 +66,16 @@ namespace Quiz.Business.Concrete
                 await _unitOfWork.CompletedAsync();
                 if (result.Successeded && result.Data != null)
                 {
-                    response.Message = "Successful transaction";
+                    response.Message = "Quiz Silme İşlemi Başarılı";
                     response.Data = _mapper.Map<QuizDto>(result.Data);
                     response.Successeded = result.Successeded;
-                    response.StatusCode = 200;
 
                 }
                 else
                 {
-                    response.Message = "No Content";
+                    response.Message = "İşlem Sırasında Hata Oluştu";
                     response.Successeded = false;
                     response.Data = null;
-                    response.StatusCode = 204;
                 }
             }
             catch (Exception exception)
@@ -88,7 +83,6 @@ namespace Quiz.Business.Concrete
                 response.Message = exception.Message;
                 response.Successeded = false;
                 response.Data = null;
-                response.StatusCode = 400;
             }
             return response;
         }
@@ -100,18 +94,16 @@ namespace Quiz.Business.Concrete
                 var result = await _quizDal.GetAsync(x => x.Id == id);
                 if (result.Successeded && result.Data != null)
                 {
-                    response.Message = "Successful transaction";
+                    response.Message = "Quiz Getirme İşlemi Başarılı";
                     response.Data = _mapper.Map<QuizDto>(result.Data);
                     response.Successeded = result.Successeded;
-                    response.StatusCode = 200;
 
                 }
                 else
                 {
-                    response.Message = "No Content";
+                    response.Message = "İşlem Sırasında Hata Oluştu";
                     response.Successeded = false;
                     response.Data = null;
-                    response.StatusCode = 204;
                 }
             }
             catch (Exception exception)
@@ -119,7 +111,6 @@ namespace Quiz.Business.Concrete
                 response.Message = exception.Message;
                 response.Successeded = false;
                 response.Data = null;
-                response.StatusCode = 400;
             }
             return response;
         }
@@ -132,17 +123,21 @@ namespace Quiz.Business.Concrete
                 var result = _mapper.Map<List<QuizDto>>(quizs.Data);
                 if (result.Any() && quizs.Successeded)
                 {
-                    response.Message = "Successful transaction";
+                    response.Message = "Quiz Listeleme İşlemi Başarılı";
                     response.Data = _mapper.Map<List<QuizDto>>(quizs.Data);
                     response.Successeded = quizs.Successeded;
-                    response.StatusCode = 200;
+                }
+                else if (quizs.Successeded && !result.Any())
+                {
+                    response.Message = "Kayıt Girişi Yapılmamış";
+                    response.Data = null;
+                    response.Successeded = quizs.Successeded;
                 }
                 else
                 {
-                    response.Message = "No Content";
+                    response.Message = "İşlem Sırasında Hata Oluştu";
                     response.Data = null;
                     response.Successeded = false;
-                    response.StatusCode = 204;
                 }
             }
             catch (Exception exception)
@@ -150,7 +145,6 @@ namespace Quiz.Business.Concrete
                 response.Message = exception.Message;
                 response.Successeded = false;
                 response.Data = null;
-                response.StatusCode = 400;
             }
             return response;
         }
@@ -164,17 +158,15 @@ namespace Quiz.Business.Concrete
 
                 if (result.Successeded && result.Data != null)
                 {
-                    response.Message = "Successful transaction";
+                    response.Message = "Quiz Güncelleme İşlemi Başarılı";
                     response.Data = _mapper.Map<QuizDto>(result.Data);
                     response.Successeded = result.Successeded;
-                    response.StatusCode = 200;
                 }
                 else
                 {
-                    response.Message = "No Content";
-                    response.Successeded = false;
+                    response.Message = "İşlem Sırasında Hata Oluştu";
+                    response.Successeded = result.Successeded;
                     response.Data = null;
-                    response.StatusCode = 204;
                 }
             }
             catch (Exception exception)
@@ -182,7 +174,6 @@ namespace Quiz.Business.Concrete
                 response.Message = exception.Message;
                 response.Successeded = false;
                 response.Data = null;
-                response.StatusCode = 400;
             }
             return response;
         }

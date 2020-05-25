@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Quiz.Business.Security.Microsoft.Jwt.Abstract;
-using Quiz.Business.Security.Microsoft.Jwt.Model;
-using Quiz.Dto.JwtToken;
+using Quiz.Dto;
+using Quiz.Dto.Jwt;
 using Quiz.Entities;
 
 namespace Quiz.Business.Security.Microsoft.Jwt.Concrete
@@ -19,23 +19,22 @@ namespace Quiz.Business.Security.Microsoft.Jwt.Concrete
 
     public class Token :IToken
     {
-        private readonly JwtTokenDto _jwtTokenOptions;
-        public Token(IOptions<JwtTokenDto> jwtTokenOptions)
+        private readonly JwtTokenOptionsDto _jwtTokenOptions;
+        public Token(IOptions<JwtTokenOptionsDto> jwtTokenOptions)
         {
             _jwtTokenOptions = jwtTokenOptions.Value;
         }
-        public AccessToken CreateAccessToken(Users user)
+        public AccessTokenDto CreateAccessToken(Users user)
         {
             try
             {
-                var accessTokenExpiration = DateTime.Now.AddMinutes(_jwtTokenOptions.AccessTokenExpiration);
+                var accessTokenExpiration = DateTime.Now.AddYears(_jwtTokenOptions.AccessTokenExpiration);
                 var securityKey = SignHandler.GetSecurityKey(_jwtTokenOptions.SecurityKey);
                 var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
                 var token = new JwtSecurityToken(issuer: _jwtTokenOptions.Issuer, audience: _jwtTokenOptions.Audience, claims:
                     SetClaim(user), expires: accessTokenExpiration, notBefore: DateTime.Now, signingCredentials: signingCredentials);
                 var newJwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-                var newAccessToken = new AccessToken
+                var newAccessToken = new AccessTokenDto
                 {
                     Token = newJwtToken,
                     Expiration = accessTokenExpiration,

@@ -17,10 +17,8 @@ namespace Quiz.UnitOfWork.Concrete
         }
         public async Task CompletedAsync()
         {
-            using (_quizContext)
-            {
-                await _quizContext.SaveChangesAsync();
-            }
+            await _quizContext.SaveChangesAsync();
+
         }
     }
 }

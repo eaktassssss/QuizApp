@@ -11,7 +11,7 @@ using Quiz.Results.Concrete;
 
 namespace Quiz.Repositories.Concrete
 {
-    public class RepositoryBase<TContext, TEntity> : IRepository<TEntity>
+    public class RepositoryBase<TContext, TEntity> :IRepository<TEntity>
     where TEntity : class
     where TContext : DbContext
     {
@@ -23,58 +23,92 @@ namespace Quiz.Repositories.Concrete
         public async Task<IDataResult<List<TEntity>>> GetListAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             var response = new DataResult<List<TEntity>>();
-            using (_context)
+            if (filter == null)
             {
-                if (filter == null)
-                {
-                    var result = await _context.Set<TEntity>().ToListAsync();
-                    response.Successeded = true;
-                    response.Data = result;
-                }
-                else
-                {
-                    var result = await _context.Set<TEntity>().Where(filter).ToListAsync();
-                    response.Successeded = true;
-                    response.Data = result;
-                }
+                var result = await _context.Set<TEntity>().ToListAsync();
+                response.Successeded = true;
+                response.Data = result;
+                return response;
             }
-            return response;
+            else
+            {
+                var result = await _context.Set<TEntity>().Where(filter).ToListAsync();
+                response.Successeded = true;
+                response.Data = result;
+                return response;
+            }
         }
         public async Task<IDataResult<TEntity>> AddAsync(TEntity entity)
         {
+
             var response = new DataResult<TEntity>();
             var result = _context.Entry(entity);
-            result.State =await Task.Run(()=> EntityState.Added);
-            response.Successeded = true;
-            response.Data = result.Entity;
-            return response;
+            result.State = await Task.Run(() => EntityState.Added);
+            if (result.Entity == null)
+            {
+                response.Successeded = false;
+                response.Data = null;
+                return response;
+            }
+            else
+            {
+                response.Successeded = true;
+                response.Data = result.Entity;
+                return response;
+            }
         }
         public async Task<IDataResult<TEntity>> UpdateAsync(TEntity entity)
         {
             var response = new DataResult<TEntity>();
             var result = _context.Entry(entity);
-            result.State = await Task.Run(()=>EntityState.Modified);
-            response.Successeded = true;
-            response.Data = result.Entity;
-            return response;
+            result.State = await Task.Run(() => EntityState.Modified);
+            if (result.Entity == null)
+            {
+                response.Successeded = false;
+                response.Data = null;
+                return response;
+            }
+            else
+            {
+                response.Successeded = true;
+                response.Data = result.Entity;
+                return response;
+            }
         }
         public async Task<IDataResult<TEntity>> DeleteAsync(TEntity entity)
         {
             var response = new DataResult<TEntity>();
             var result = _context.Entry(entity);
             result.State = await Task.Run(() => EntityState.Deleted);
-            response.Successeded = true;
-            response.Data = result.Entity;
-            return response;
+            if (result.Entity == null)
+            {
+                response.Successeded = false;
+                response.Data = null;
+                return response;
+            }
+            else
+            {
+                response.Successeded = true;
+                response.Data = result.Entity;
+                return response;
+            }
         }
-
         public async Task<IDataResult<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter)
         {
             var response = new DataResult<TEntity>();
             var result = await _context.Set<TEntity>().FirstOrDefaultAsync(filter);
-            response.Successeded = true;
-            response.Data = result;
-            return response;
+            if (result == null)
+            {
+                response.Successeded = false;
+                response.Data = null;
+                return response;
+            }
+            else
+            {
+                response.Successeded = true;
+                response.Data = result;
+                return response;
+            }
         }
     }
 }

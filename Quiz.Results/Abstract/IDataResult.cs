@@ -9,6 +9,5 @@ namespace Quiz.Results.Abstract
         T Data { get; set; }
         string Message { get; set; }
         bool Successeded { get; set; }
-        int StatusCode { get; set; }
     }
 }

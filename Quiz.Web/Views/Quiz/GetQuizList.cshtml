@@ -1,0 +1,130 @@
+﻿@model List<Quiz.Dto.QuizDto>
+@{
+    ViewData["Title"] = "GetQuizList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .listWrap {
+        height: 800px;
+        width: 1000px;
+    }
+
+    .list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: table;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+        .list li {
+            background-color: #f0f0f0;
+            display: table-row;
+            color: #5c5c5c;
+        }
+
+            .list li:nth-child(odd) {
+                background-color: #f2f2f2;
+                display: table-row;
+                font-size: 9pt;
+                color: #5c5c5c;
+            }
+
+                .list li:nth-child(odd):hover {
+                    background-color: #dadada;
+                }
+
+            .list li:nth-child(even) {
+                background-color: #e8e8e8;
+                display: table-row;
+                font-size: 9pt;
+                color: #5c5c5c;
+            }
+
+                .list li:nth-child(even):hover {
+                    background-color: #dadada;
+                }
+
+            .list li:nth-child(1) span:first-child {
+                border-top-left-radius: 6px;
+            }
+
+            .list li:nth-child(1) span:last-child {
+                border-top-right-radius: 6px;
+            }
+
+
+            .list li:nth-child(1) {
+                background-color: #201c2b;
+                text-transform: uppercase;
+                font-size: 8pt;
+                font-weight: bold;
+                color: #b8b5c0;
+            }
+
+                .list li:nth-child(1):hover {
+                }
+
+
+
+                .list li:nth-child(1) span {
+                    border-bottom: 2px solid #7d5bbe;
+                    padding: 14px;
+                }
+
+        .list span {
+            text-align: left;
+            display: table-cell;
+            padding: 6px;
+            vertical-align: middle;
+        }
+
+
+            .list span:nth-child(2) {
+            }
+</style>
+<div class="container">
+
+    <div class="listWrap">
+
+        <ul class="list">
+
+            <li>
+                <span>Quiz No</span>
+                <span>Quiz Name</span>
+                <span>Description</span>
+                <span>Created Date</span>
+                <span>Actions</span>
+                <span></span>
+            </li>
+            @foreach (var quiz in Model)
+            {
+                <li>
+                    <span>@quiz.Id</span>
+                    <span>@quiz.QuizName</span>
+                    <span>@quiz.Description.Substring(0,15)</span>
+                    <span><span class="label label-warning">@quiz.CreatedDate.ToShortDateString()</span></span>
+                    <span>
+                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                            <a href="@Url.Action("EditQuiz", "Quiz", new {id = @quiz.Id})">
+                                <button type="button" class="btn btn-default">Edit</button>
+                            </a>
+                            <a href="@Url.Action("DeleteQuiz", "Quiz", new {id = @quiz.Id})">
+                                <button type="button" class="btn btn-default">Delete</button>
+                            </a>
+                        </div>
+                    </span>
+                    <span></span>
+                </li>
+            }
+
+            <li>
+
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+

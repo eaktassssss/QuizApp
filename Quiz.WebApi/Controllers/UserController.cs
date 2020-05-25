@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Quiz.Business.Abstract;
@@ -17,7 +18,7 @@ namespace Quiz.WebApi.Controllers
     {
         private readonly IUserService _userService;
         private readonly TokenClaimsHelper _tokenClaimsHelper;
-        public UserController(IUserService userService, TokenClaimsHelper tokenClaimsHelper)
+        public UserController(IUserService userService)
         {
             _userService = userService;
             _tokenClaimsHelper = new TokenClaimsHelper();
@@ -68,7 +69,7 @@ namespace Quiz.WebApi.Controllers
             }
             return Ok(result);
         }
-        [HttpPost("delete-quiz")]
+        [HttpPost("delete-user")]
         public async Task<ActionResult> DeleteAsync(UserDto userDto)
         {
             var result = await _userService.DeleteAsync(userDto);

@@ -17,9 +17,10 @@ using Quiz.Results.Concrete;
 
 namespace Quiz.WebApi.Controllers
 {
-    [Authorize]
+   
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class QuizController : ControllerBase
     {
         private readonly IQuizService _quizService;
@@ -31,7 +32,7 @@ namespace Quiz.WebApi.Controllers
         public async Task<ActionResult> GetListAsync()
         {
             var result = await _quizService.GetListAsync();
-            if (!result.Successeded && !result.Data.Any())
+            if (!result.Successeded)
             {
                 return BadRequest(result);
             }
@@ -57,7 +58,7 @@ namespace Quiz.WebApi.Controllers
             }
             return Ok(result);
         }
-        [HttpPost("get-quiz")]
+        [HttpGet("get-quiz/{id:int}")]
         public async Task<ActionResult> GetAsync(int id)
         {
             var result = await _quizService.GetAsync(id);

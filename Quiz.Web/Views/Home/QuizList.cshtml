@@ -1,0 +1,28 @@
+﻿@model List<Quiz.Dto.QuizDto>
+@{
+    ViewData["Title"] = "QuizList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-3">
+    @foreach (var quizDto in Model)
+    {
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        @quizDto.QuizName
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">@quizDto.Description</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        @quizDto.CreatedDate
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+</div>

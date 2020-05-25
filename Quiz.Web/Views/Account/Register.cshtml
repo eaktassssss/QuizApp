@@ -1,0 +1,62 @@
+﻿@model Quiz.Dto.Account.RegisterDto
+@{
+    Layout = null;
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/register.css" rel="stylesheet" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<div class="container-fluid">
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register-form" }))
+    {<h1>Üyelik İşlemleri</h1>
+        <br />
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <label for="firstName">Ad</label>
+                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <label for="lastName">Soyad</label>
+                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <label for="email">E-Posta</label>
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <label for="password">Şifre</label>
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <label for="password">Şifre Tekrar</label>
+                @Html.PasswordFor(x => x.PasswordConfrim, new { @class = "form-control" })
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+                <button type="submit"  class="btn btn-default regbutton">Üye Ol</button>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+                <a href="@Url.Action("Login", "Account")">
+                    <button type="button" class="btn btn-default logbutton">Giriş Yap</button>
+                </a>
+            </div>
+        </div>
+
+    }
+
+</div>
+ 

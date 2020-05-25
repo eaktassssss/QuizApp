@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Quiz.Business.Security.Microsoft.Jwt.Model
+namespace Quiz.Dto
 {
-    public class AccessToken
+    public class AccessTokenDto
     {
         public string Token { get; set; }
         public DateTime Expiration { get; set; }

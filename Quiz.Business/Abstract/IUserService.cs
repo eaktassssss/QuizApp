@@ -16,8 +16,9 @@ namespace Quiz.Business.Abstract
         Task<IDataResult<UserDto>> DeleteAsync(UserDto entity);
         Task<IDataResult<UserDto>> GetAsync(int id);
         Task<IDataResult<UserDto>> GetByEmailPassword(string email, string password);
-        Task<IDataResult<UserDto>> GetByRefreshToken(int userId, string refreshToken);
+        Task<IDataResult<UserDto>> GetByRefreshToken(string refreshToken);
         Task<IDataResult<UserDto>> SaveRefreshToken(int userId, string refreshToken);
-        Task<IDataResult<UserDto>> RemoveRefreshToken(UserDto userDto);
+        Task<IDataResult<UserDto>> RemoveRefreshToken(string refreshToken);
+
     }
 }

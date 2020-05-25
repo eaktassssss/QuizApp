@@ -3,21 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.WebApi", "Quiz.WebApi\Quiz.WebApi.csproj", "{1BACAC26-A75F-4147-A9BF-B17C19B2CE7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.WebApi", "Quiz.WebApi\Quiz.WebApi.csproj", "{1BACAC26-A75F-4147-A9BF-B17C19B2CE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Entities", "Quiz.Entities\Quiz.Entities.csproj", "{2E83272A-9002-42EE-90B0-847E16ED7797}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.Entities", "Quiz.Entities\Quiz.Entities.csproj", "{2E83272A-9002-42EE-90B0-847E16ED7797}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.DataAccess", "Quiz.DataAccess\Quiz.DataAccess.csproj", "{76F1B158-FB17-4EE1-985C-8F635884947E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.DataAccess", "Quiz.DataAccess\Quiz.DataAccess.csproj", "{76F1B158-FB17-4EE1-985C-8F635884947E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Repositories", "Quiz.Repositories\Quiz.Repositories.csproj", "{F233E2E7-D3DC-4D84-85A7-A02C621C42EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.Repositories", "Quiz.Repositories\Quiz.Repositories.csproj", "{F233E2E7-D3DC-4D84-85A7-A02C621C42EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Results", "Quiz.Results\Quiz.Results.csproj", "{B27A25F9-B686-45B4-8B96-95B88FC07CA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.Results", "Quiz.Results\Quiz.Results.csproj", "{B27A25F9-B686-45B4-8B96-95B88FC07CA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Business", "Quiz.Business\Quiz.Business.csproj", "{01BCE7A7-B25B-4855-ABE1-6A994FFCDA28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.Business", "Quiz.Business\Quiz.Business.csproj", "{01BCE7A7-B25B-4855-ABE1-6A994FFCDA28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Dto", "Quiz.Dto\Quiz.Dto.csproj", "{B7129874-51C1-47E3-B13E-045F7D32D352}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.Dto", "Quiz.Dto\Quiz.Dto.csproj", "{B7129874-51C1-47E3-B13E-045F7D32D352}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.UnitOfWork", "Quiz.UnitOfWork\Quiz.UnitOfWork.csproj", "{89401D8A-B5E8-4FA9-9E7B-0869BAC7F7E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quiz.UnitOfWork", "Quiz.UnitOfWork\Quiz.UnitOfWork.csproj", "{89401D8A-B5E8-4FA9-9E7B-0869BAC7F7E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Web", "Quiz.Web\Quiz.Web.csproj", "{AE5D3D95-E9C5-4D3A-8409-E3E5CE6BB965}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.Helper", "Quiz.Helper\Quiz.Helper.csproj", "{7E800801-CE05-45D4-ABF1-38243D25CD66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{89401D8A-B5E8-4FA9-9E7B-0869BAC7F7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89401D8A-B5E8-4FA9-9E7B-0869BAC7F7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89401D8A-B5E8-4FA9-9E7B-0869BAC7F7E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE5D3D95-E9C5-4D3A-8409-E3E5CE6BB965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE5D3D95-E9C5-4D3A-8409-E3E5CE6BB965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE5D3D95-E9C5-4D3A-8409-E3E5CE6BB965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE5D3D95-E9C5-4D3A-8409-E3E5CE6BB965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E800801-CE05-45D4-ABF1-38243D25CD66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E800801-CE05-45D4-ABF1-38243D25CD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E800801-CE05-45D4-ABF1-38243D25CD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E800801-CE05-45D4-ABF1-38243D25CD66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

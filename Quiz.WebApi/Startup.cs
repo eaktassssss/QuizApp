@@ -14,13 +14,14 @@ using Quiz.Business.Mapping;
 using Quiz.Business.Security.Microsoft.Jwt.Concrete;
 using Quiz.DataAccess.Abstract;
 using Quiz.DataAccess.Concrete;
-using Quiz.Dto.JwtToken;
 using Quiz.Entities.Context;
 using Quiz.UnitOfWork.Abstract;
 using Quiz.UnitOfWork.Concrete;
 using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Quiz.Business.Security.Microsoft.Jwt.Abstract;
+using Quiz.Dto.Jwt;
 
 namespace Quiz.WebApi
 {
@@ -33,7 +34,7 @@ namespace Quiz.WebApi
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            var tokenOptions = Configuration.GetSection("TokenOptions").Get<JwtTokenDto>();
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<JwtTokenOptionsDto>();
             if (tokenOptions != null)
             {
                 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -46,7 +47,8 @@ namespace Quiz.WebApi
                         ValidateIssuerSigningKey = true, // Token app setting içindeki security key ile mi imzalanmış onu kontrol eder
                         ValidIssuer = tokenOptions.Issuer,
                         ValidAudience = tokenOptions.Audience,
-                        IssuerSigningKey = SignHandler.GetSecurityKey(tokenOptions.SecurityKey) // Gelen token  bizim security key'imiz ile işaretlenmiş mi onun kontrolünü sağladık
+                        IssuerSigningKey = SignHandler.GetSecurityKey(tokenOptions.SecurityKey), // Gelen token  bizim security key'imiz ile işaretlenmiş mi onun kontrolünü sağladık
+                        ClockSkew = TimeSpan.Zero // Uygulamanın atılan sunucular arasındaki zaman farkını gidermek için verilir tanımlanan değer kadar mevcut token süresine ekler
                     };
                 });
             }
@@ -60,6 +62,7 @@ namespace Quiz.WebApi
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IToken, Token>();
             services.AddScoped<IUnitOfWork, BaseUnitOfWork>();
+            services.AddScoped<IAuthenticationService, AuthenticationManager>();
             services.AddScoped<QuizContext>();
             var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new QuizMapper()); });
             IMapper mapper = mappingConfig.CreateMapper();
@@ -101,7 +104,7 @@ namespace Quiz.WebApi
 
                 });
             });
-            services.Configure<JwtTokenDto>(Configuration.GetSection("TokenOptions"));
+            services.Configure<JwtTokenOptionsDto>(Configuration.GetSection("TokenOptions"));
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -119,8 +122,9 @@ namespace Quiz.WebApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
+           
             app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(name: "default", pattern: "{api}/{controller=home}/{action=index}");

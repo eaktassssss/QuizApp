@@ -11,6 +11,5 @@ namespace Quiz.Results.Concrete
         public T Data { get; set; }
         public string Message { get; set; }
         public bool Successeded { get; set; }
-        public int StatusCode { get; set; }
     }
 }

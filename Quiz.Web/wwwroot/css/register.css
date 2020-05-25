@@ -1,0 +1,75 @@
+﻿body, html {
+    background-color: white;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 18px;
+}
+
+.register-form {
+    font-size: 16px;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    -moz-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.regbutton {
+    height: 50px;
+    width: 200px;
+    background-color: #28a745;
+    border-radius: 0px;
+    font-size: 18px;
+    color: black;
+    border: none !important;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+    .regbutton:hover {
+        color: white;
+        background-color: #28a745;
+    }
+
+    .regbutton:active {
+        color: white;
+        background-color: #28a745;
+    }
+.form-control {
+    border-color: #28a745;
+}
+.logbutton {
+    height: 50px;
+    width: 200px;
+    background-color: #28a745;
+    border-radius: 0px;
+    font-size: 18px;
+    color: black;
+    border: none !important;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+    .logbutton:hover {
+        color: white;
+        background-color: #28a745;
+    }
+
+    .logbutton:active {
+        color: white;
+        background-color: #28a745;
+    }
+
+
+
+.register-form label {
+    color: black;
+    font-weight: bold;
+}
+
+.register-form input {
+    margin-bottom: 5px;
+    width: 430px;
+    height: 40px;
+    border-radius: 0px;
+}
